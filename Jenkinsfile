@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers {
-    pollSCM('*/5 * * * *')
-    }
   stages {
     stage('Deploy') {
       when {
@@ -12,5 +9,9 @@ pipeline {
         ansiblePlaybook(playbook: '/home/omnipro/Documents/ansible/playbooks/test/testing.yml', colorized: true, inventory: '/home/omnipro/Documents/ansible/playbooks/test/hosts')
       }
     }
+
+  }
+  triggers {
+    pollSCM('*/5 * * * *')
   }
 }
