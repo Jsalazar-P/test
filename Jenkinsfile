@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  triggers {
+    pollSCM('*/5 * * * *')
+  }
   stages {
     stage('Deploy') {
       when {
@@ -10,8 +13,5 @@ pipeline {
       }
     }
 
-  }
-  triggers {
-    pollSCM('*/5 * * * *')
   }
 }
