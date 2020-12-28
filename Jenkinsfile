@@ -1,7 +1,9 @@
 pipeline {
-  agent any
-  triggers {
-    pollSCM('*/5 * * * *')
+  agent {
+    node {
+      label 'testing'
+    }
+
   }
   stages {
     stage('Deploy') {
@@ -13,5 +15,8 @@ pipeline {
       }
     }
 
+  }
+  triggers {
+    pollSCM('*/5 * * * *')
   }
 }
