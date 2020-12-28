@@ -1,16 +1,17 @@
 pipeline {
-  agent {
-    node {
-      label 'testing'
+  agent any
+  triggers {
+    pollSCM('*/5 * * * *')
     }
-
   }
   stages {
-    stage('create new file') {
+    stage('Deploy') {
+      when {
+        branch 'main'
+      }
       steps {
-        sh 'mkdir -p /home/jsalazar/test/testing'
+        ansiblePlaybook(playbook: '/home/omnipro/Documents/ansible/playbooks/test/testing.yml', colorized: true, inventory: '/home/omnipro/Documents/ansible/playbooks/test/hosts')
       }
     }
-
   }
 }
